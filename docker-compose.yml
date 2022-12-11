@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  db:
+    image: mongo
+    container_name: "mongo_db"
+    restart: always
+    ports:
+      - "27017:27017"
+  users_getter:
+    image: demiproger/pdris_task_1_getter
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+  users_setter:
+    image: demiproger/pdris_task_1_setter
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
